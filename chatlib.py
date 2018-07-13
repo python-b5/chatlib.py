@@ -21,10 +21,10 @@ class Bot:
         print(self.name + ":", self.message)
 
     def get_response(self):
-        return str(input(self.prompt))
+        return str(input(self.prompt + " "))
 
     def get_name(self):
-        self.username = str(input("Name?"))
+        self.username = str(input("Name? "))
         self.prompt = self.username + ":"
         print("")
 
