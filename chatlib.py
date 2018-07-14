@@ -75,6 +75,7 @@ class Bot:
                             done = True
                             self.selected_rp = self.responses[self.current_path]
                             self.message = random.choice(self.selected_rp)
+                            time.sleep(random.randint(1, 3))
                             self.display()
                             self.current_path = "_main"
             for i in self.keywords:
@@ -91,7 +92,9 @@ class Bot:
                             done = True
                             self.selected_rp = self.responses[self.current_path]
                             self.message = random.choice(self.selected_rp)
+                            time.sleep(random.randint(1, 3))
                             self.display()
                             self.current_path = "_main"
             if not done:
+                time.sleep(random.randint(1, 3))
                 self.display()
