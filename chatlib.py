@@ -75,20 +75,23 @@ class Bot:
                             done = True
                             self.selected_rp = self.responses[self.current_path]
                             self.message = random.choice(self.selected_rp)
-                            time.sleep(len(self.message)/10)
                             self.display()
                             self.current_path = "_main"
             for i in self.keywords:
                 for j in self.keywords[i]:
+                    bad = False
+                    for k in self.response.split():
+                        if j in k and len(k) > len(j):
+                            bad = True
+                    if bad:
+                        continue
                     if j in self.response:
                         if not done:
                             self.current_path = i
                             done = True
                             self.selected_rp = self.responses[self.current_path]
                             self.message = random.choice(self.selected_rp)
-                            time.sleep(len(self.message) / 10)
                             self.display()
                             self.current_path = "_main"
             if not done:
-                time.sleep(len(self.message) / 10)
                 self.display()
