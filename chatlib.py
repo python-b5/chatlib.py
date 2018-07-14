@@ -2,6 +2,7 @@
 # python-b5
 
 import random
+import time
 from collections import defaultdict
 
 class Bot:
@@ -21,10 +22,10 @@ class Bot:
         print(self.name + ":", self.message)
 
     def get_response(self):
-        return str(input(self.prompt + " "))
+        return str(input(self.prompt))
 
     def get_name(self):
-        self.username = str(input("Name? "))
+        self.username = str(input("Name?"))
         self.prompt = self.username + ":"
         print("")
 
@@ -69,20 +70,25 @@ class Bot:
             for i in self.phrases:
                 for j in self.phrases[i]:
                     if j == self.response:
-                        self.current_path = i
-                        done = True
-                        self.selected_rp = self.responses[self.current_path]
-                        self.message = random.choice(self.selected_rp)
-                        self.display()
-                        self.current_path = "_main"
+                        if not done:
+                            self.current_path = i
+                            done = True
+                            self.selected_rp = self.responses[self.current_path]
+                            self.message = random.choice(self.selected_rp)
+                            time.sleep(len(self.message)/10)
+                            self.display()
+                            self.current_path = "_main"
             for i in self.keywords:
                 for j in self.keywords[i]:
                     if j in self.response:
-                        self.current_path = i
-                        done = True
-                        self.selected_rp = self.responses[self.current_path]
-                        self.message = random.choice(self.selected_rp)
-                        self.display()
-                        self.current_path = "_main"
+                        if not done:
+                            self.current_path = i
+                            done = True
+                            self.selected_rp = self.responses[self.current_path]
+                            self.message = random.choice(self.selected_rp)
+                            time.sleep(len(self.message) / 10)
+                            self.display()
+                            self.current_path = "_main"
             if not done:
+                time.sleep(len(self.message) / 10)
                 self.display()
