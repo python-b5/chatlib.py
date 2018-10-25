@@ -25,8 +25,8 @@ class Bot:
         return str(input(self.prompt))
 
     def get_name(self):
-        self.username = str(input("Name?"))
-        self.prompt = self.username + ":"
+        self.username = str(input("Name? "))
+        self.prompt = self.username + ": "
         print("")
 
     def create_path(self, name):
