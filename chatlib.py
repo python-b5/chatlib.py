@@ -9,7 +9,7 @@ class Bot:
     def __init__(self, name, greeting):
         self.name = name
         self.greeting = greeting
-        self.prompt = "You:"
+        self.prompt = "You: "
         self.username = "You"
         self.keywords = defaultdict(list)
         self.responses = defaultdict(list)
