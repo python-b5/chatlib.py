@@ -51,7 +51,7 @@ Bot.get_response(message) # gets response from bot
 ```python
 Bot.username # user's name
 
-Bot.name - bot's name
+Bot.name # bot's name
 
-Bot.greeting - bot's greeting
+Bot.greeting # bot's greeting
 ```
