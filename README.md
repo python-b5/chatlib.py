@@ -16,6 +16,14 @@ You can then create your bot.
 
 ## Docs
 
+Listed here are all the functions, classes and values in chatlib.py, for your reference.
+
+The path for when no conditions for other paths are met is simply nothing, like
+
+```python
+Bot.add_keyword("", keyword)
+```
+
 ### Classes
 
 ```python
