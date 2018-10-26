@@ -6,7 +6,9 @@ chatlib allows beginners to make chatbots easily! If you're having trouble with 
 
 To use chatlib.py, simply copy the chatlib.py file to your project folder. Then simply import the module "chatlib" in your script, like this:
 
+```python
 import chatlib
+```
 
 You can then create your bot.
 
