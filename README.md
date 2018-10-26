@@ -18,6 +18,8 @@ You can then create your bot.
 
 Listed here are all the functions, classes and values in chatlib.py, for your reference.
 
+All paths, keywords, phrases, questions and paths, keywords and phrases inside questions should be listed in order of priority, from most important to least important.
+
 The path for when no conditions for other paths are met is simply nothing, like
 
 ```python
