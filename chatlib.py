@@ -56,6 +56,7 @@ class Bot:
     # Create new path
     def create_path(self, name):
         self._keywords[name] = []
+        self._phrases[name] = []
         self._responses[name] = []
 
     # Add phrase to path
