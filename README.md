@@ -21,7 +21,7 @@ Listed here are all the functions, classes and values in chatlib.py, for your re
 The path for when no conditions for other paths are met is simply nothing, like
 
 ```python
-Bot.add_keyword("", keyword)
+Bot.add_response("", response)
 ```
 
 ### Classes
