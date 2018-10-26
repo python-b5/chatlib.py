@@ -198,5 +198,4 @@ class Bot:
         else:
             self.get_question_response(self._question_keywords, self._question_phrases, self.find_question_response)
             self._do_question = False
-
         return self._response
