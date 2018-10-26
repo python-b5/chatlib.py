@@ -246,7 +246,7 @@ def main():
     print()
 
     # Print greeting
-    print(bot.name + ":", "Hi, I'm Mr. Bot!\n")
+    print(bot.name + ":", "Hi, I'm", bot.name + "!\n")
 
     # Simple mainloop
     while True:
