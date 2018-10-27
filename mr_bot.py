@@ -4,10 +4,14 @@
 # An example chatbot, made with chatlib.py.
 
 import chatlib
+from datetime import datetime
 
 def main():
     # Create bot
     bot = chatlib.Bot("Mr. Bot")
+
+    # Create alterable values
+    time = chatlib.Value("0:00 AM")
 
     # Main path
     bot.add_response("", "Can you say that again?")
@@ -29,6 +33,22 @@ def main():
     bot.add_response("name", ("I'm ", bot.name, "."))
     bot.add_response("name", (bot.name, ". I already told you, remember?"))
     bot.add_response("name", ("My name is ", bot.name, "."))
+
+    bot.create_path("time")
+    bot.add_keyword("time", "what's the time")
+    bot.add_keyword("time", "whats the time")
+    bot.add_keyword("time", "wats the time")
+    bot.add_keyword("time", "what is the time")
+    bot.add_keyword("time", "wat is the time")
+    bot.add_keyword("time", "what's the current time")
+    bot.add_keyword("time", "whats the current time")
+    bot.add_keyword("time", "wats the current time")
+    bot.add_keyword("time", "what is the current time")
+    bot.add_keyword("time", "wat is the current time")
+    bot.add_keyword("time", "what time is it")
+    bot.add_keyword("time", "wat time is it")
+    bot.add_response("time", ("My computer senses it is ", time, "."))
+    bot.add_response("time", ("I believe it is ", time, " right now."))
 
     # How are you path
     bot.create_path("howareyou")
@@ -410,12 +430,13 @@ def main():
     bot.set_username(input("Username? "))
 
     # Print greeting
-    print(bot.name.value + ":", "Hi, I'm", bot.name.value + "!\n")
+    print("\n" + bot.name.value + ":", "Hi, I'm", bot.name.value + "!\n")
 
     # Simple mainloop
     while True:
         r = input(bot.username.value + ": ")
         print()
+        time.value = datetime.now().strftime("%I:%M %p")
         print(bot.name.value + ":", bot.get_response(r))
         print()
 
