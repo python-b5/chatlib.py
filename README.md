@@ -1,6 +1,6 @@
-# chatlib
+# chatlib.py
 
-chatlib allows beginners to make chatbots easily! If you're having trouble with coding, chatlib can help you! Even if you can code well, chatlib will allow you to make chatbots quicker!
+chatlib.py allows beginners to make chatbots easily!
 
 Try a demo at https://chatlibpy.evangorman.repl.run.
 
