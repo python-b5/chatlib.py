@@ -204,7 +204,6 @@ bot.add_question_phrase("howareyou", "I'm good, how about you?", "bad", "Not tha
 bot.add_question_response("howareyou", "I'm good, how about you?", "bad", "Sorry to hear that...")
 bot.add_question_response("howareyou", "I'm good, how about you?", "bad", "I hope you feel better soon.")
 
-
 bot.set_username(input("Username? "))
 print()
 print(bot.name + ":", "Hi, I'm", bot.name + "!\n")
