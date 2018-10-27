@@ -110,11 +110,11 @@ User: I like it when flags wave.
 Bob: Sorry, I don't understand.
 ```
 
-What if you want your bot to ask a question? Let's make a new path, with some phrases:
+What if you want your bot to ask a question? Let's make a new path, with a keyword and phrase (keywords are recommended for use instead of phrases most of the time, as punctuation/other words in sentence are allowed):
 
 ``` python
 bot.create_path("howareyou")
-bot.add_phrase("howareyou", "How are you?")
+bot.add_keyword("howareyou", "how are you")
 bot.add_phrase("howareyou", "Are you doing well?")
 ```
 
