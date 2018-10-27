@@ -17,7 +17,7 @@ class Bot:
     def __init__(self, name):
         self.name = Value(name)
         self.username = Value("unnamed")
-        self.punctuation = ['\n', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '`', '-', '=', '[', ']', '\\', ';', "'", ',', '.', '/', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '~', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?']
+        self.punctuation = ['\n', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '`', '-', '=', '[', ']', '\\', ';', "'", ',', '.', '/', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '~', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?', ' ']
         self._current_question = None
         self._keywords = defaultdict(list)
         self._responses = defaultdict(list)
@@ -187,9 +187,22 @@ class Bot:
                     keyword.append(str(j))
                 keyword = "".join(keyword)
                 bad = False
-                for k in self._message.split():
-                    if keyword in k and len([x for x in k if x not in self.punctuation]) > len(keyword):
+                index = 0
+                count = 0
+                while count < len(keyword):
+                    try:
+                        if keyword[index] == keyword[count]:
+                            count += 1
+                        else:
+                            count = 0
+                    except IndexError:
+                        pass
+                    index += 1
+                try:
+                    if self._message[index] not in self.punctuation:
                         bad = True
+                except IndexError:
+                    pass
                 if bad:
                     continue
                 if keyword in self._message:
@@ -251,9 +264,22 @@ class Bot:
                             keyword.append(str(l))
                         keyword = "".join(keyword)
                         bad = False
-                        for m in self._message.split():
-                            if keyword in m and len([x for x in m if x not in self.punctuation]) > len(keyword):
+                        index = 0
+                        count = 0
+                        while count < len(keyword):
+                            try:
+                                if keyword[index] == keyword[count]:
+                                    count += 1
+                                else:
+                                    count = 0
+                            except IndexError:
+                                pass
+                            index += 1
+                        try:
+                            if self._message[index] not in self.punctuation:
                                 bad = True
+                        except IndexError:
+                            pass
                         if bad:
                             continue
                         if keyword in self._message:
