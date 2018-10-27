@@ -135,6 +135,13 @@ def main():
     bot.add_question_response("howareyou", "Good, what about you?", "good", "Great!")
     bot.add_question_response("howareyou", "Good, what about you?", "good", "Glad to hear that!")
 
+    # So path
+    bot.create_path("so")
+    bot.add_keyword("so", "so")
+    bot.add_response("so", "Yes?")
+    bot.add_response("so", "And?")
+    bot.add_response("so", "Tell me more.")
+
     # My name path
     bot.create_path("myname")
     bot.add_keyword("myname", "what's my name")
@@ -221,13 +228,6 @@ def main():
     bot.add_response("you", "...maybe.")
     bot.add_response("you", "What about me?")
     bot.add_response("you", "That may be true.")
-
-    # So path
-    bot.create_path("so")
-    bot.add_keyword("so", "so")
-    bot.add_response("so", "Yes?")
-    bot.add_response("so", "And?")
-    bot.add_response("so", "Tell me more.")
     
     # Why path
     bot.create_path("why")
