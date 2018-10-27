@@ -265,6 +265,4 @@ Bot.get_response(message) # gets response from bot
 Bot.username # user's name
 
 Bot.name # bot's name
-
-Bot.greeting # bot's greeting
 ```
