@@ -230,6 +230,8 @@ Bot.add_response("", response)
 
 ```python
 Bot(name) # the main class for your bot
+
+Value(initial_value) # A value for 
 ```
 
 ### Functions
@@ -261,7 +263,9 @@ Bot.get_response(message) # gets response from bot
 ### Values
 
 ```python
-Bot.username # user's name
+Bot.username # A Value object; user's name
 
-Bot.name # bot's name
+Bot.name # A Value object; bot's name
+
+Value.value # the value of a Value object; can be changed
 ```
