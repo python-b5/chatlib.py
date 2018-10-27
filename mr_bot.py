@@ -10,16 +10,11 @@ def main():
     bot = chatlib.Bot("Mr. Bot")
 
     # Main path
-    bot.add_response("", "Uhh...")
-    bot.add_response("", "I don't understand.")
-    bot.add_response("", "Irrelevant!")
-    bot.add_response("", "Stop speaking nonsense!")
+    bot.add_response("", "Tell me more.")
+    bot.add_response("", "Interesting.")
     bot.add_response("", "Hmm...")
-    bot.add_response("", "You make no sense!")
-    bot.add_response("", "Nonsense!")
-    bot.add_response("", "Er...")
-    bot.add_response("", "Um...")
     bot.add_response("", "What?")
+    bot.add_response("", "Cool.")
 
     # Name path
     bot.create_path("name")
@@ -118,9 +113,7 @@ def main():
     bot.add_keyword("howareyou", "you ok")
     bot.add_keyword("howareyou", "u ok")
     bot.add_response("howareyou", "I'm good. Can a robot be bad?")
-    bot.add_response("howareyou", "Think about it. In the grand scheme of things, are any of us truly 'good'?")
-    bot.add_response("howareyou", "I have been programmed to be 'good' all the time, as not to upset you.")
-    bot.add_response("howareyou", "Hmm...good, I think.")
+    bot.add_response("howareyou", "I have been programmed to be 'good' all the time, so not to upset you.")
     bot.add_question("howareyou", "Good, what about you?")
     bot.add_question_path("howareyou", "Good, what about you?", "bad")
     bot.add_question_keyword("howareyou", "Good, what about you?", "bad", "bad")
@@ -214,6 +207,27 @@ def main():
     bot.add_response("haveyou", "I'm a bot, I've only ever talked to people.")
     bot.add_response("haveyou", "Perhaps.")
     bot.add_response("haveyou", "No.")
+
+    # Thank you path
+    bot.create_path("thankyou")
+    bot.add_keyword("thankyou", "thank you")
+    bot.add_keyword("thankyou", "thanks")
+    bot.add_response("thankyou", "You're welcome.")
+    bot.add_response("thankyou", "You're very welcome.")
+
+    # You path
+    bot.create_path("you")
+    bot.add_keyword("you", "you")
+    bot.add_response("you", "...maybe.")
+    bot.add_response("you", "What about me?")
+    bot.add_response("you", "That may be true.")
+
+    # So path
+    bot.create_path("so")
+    bot.add_keyword("so", "so")
+    bot.add_response("so", "Yes?")
+    bot.add_response("so", "And?")
+    bot.add_response("so", "Tell me more.")
     
     # Why path
     bot.create_path("why")
