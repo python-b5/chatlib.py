@@ -64,6 +64,7 @@ Now the bot can recognize the words "hello" and "hi"! Let's add some things for 
 ``` python
 bot.add_response("hello", "Hi!")
 bot.add_response("hello", "Hello!")
+```
 
 Let's try our bot now:
 
