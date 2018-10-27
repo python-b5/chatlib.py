@@ -191,7 +191,7 @@ class Bot:
                 count = 0
                 while count < len(keyword):
                     try:
-                        if self._message[index] == keyword[count]:
+                        if keyword[index] == keyword[count]:
                             count += 1
                         else:
                             count = 0
@@ -268,7 +268,7 @@ class Bot:
                         count = 0
                         while count < len(keyword):
                             try:
-                                if self._message[index] == keyword[count]:
+                                if keyword[index] == keyword[count]:
                                     count += 1
                                 else:
                                     count = 0
