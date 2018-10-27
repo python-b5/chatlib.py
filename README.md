@@ -44,8 +44,7 @@ bot.set_username(input("Username? ")) # Get username
 print() # Print empty line
 print(bot.name + ":", "Hi, I'm", bot.name + "!\n") # Print bot greeting
 
-
-while True:
+while True: # Forever
     r = input(bot.username + ": ") # Get user message
     print() # Print empty line
     print(bot.name + ":", bot.get_response(r)) # Print bot response
