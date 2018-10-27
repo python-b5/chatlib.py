@@ -25,10 +25,10 @@ def main():
     bot.add_keyword("name", "whats ur name")
     bot.add_keyword("name", "what are you named")
     bot.add_keyword("name", "who are you")
-    bot.add_response("name", "Mr. Bot.")
-    bot.add_response("name", "I'm Mr. Bot.")
-    bot.add_response("name", "Mr. Bot. I already told you, remember?")
-    bot.add_response("name", "My name is Mr. Bot.")
+    bot.add_response("name", (bot.name, "."))
+    bot.add_response("name", ("I'm ", bot.name, "."))
+    bot.add_response("name", (bot.name, ". I already told you, remember?"))
+    bot.add_response("name", ("My name is ", bot.name, "."))
 
     # How are you path
     bot.create_path("howareyou")
@@ -126,7 +126,6 @@ def main():
     bot.add_keyword("age", "long have you existed")
     bot.add_keyword("age", "ur age")
     bot.add_response("age", "I don't think bots have an age.")
-    bot.add_response("age", "Maybe 30 years?")
     bot.add_response("age", "Honestly I don't know.")
     bot.add_response("age", "Hmm...I don't really know.")
 
@@ -171,8 +170,8 @@ def main():
     bot.add_keyword("myname", "whats my name")
     bot.add_keyword("myname", "what am i called")
     bot.add_keyword("myname", "who am i")
-    bot.add_response("myname", "I can say with certainty that you are " + bot.username + ".")
-    bot.add_response("myname", "I think you're " + bot.username + ".")
+    bot.add_response("myname", ("I can say with certainty that you are ", bot.username, "."))
+    bot.add_response("myname", ("I think you're ", bot.username, "."))
 
     # Odd path
     bot.create_path("odd")
@@ -409,16 +408,15 @@ def main():
 
     # Get username
     bot.set_username(input("Username? "))
-    print()
 
     # Print greeting
-    print(bot.name + ":", "Hi, I'm", bot.name + "!\n")
+    print(bot.name.value + ":", "Hi, I'm", bot.name.value + "!\n")
 
     # Simple mainloop
     while True:
-        r = input(bot.username + ": ")
+        r = input(bot.username.value + ": ")
         print()
-        print(bot.name + ":", bot.get_response(r))
+        print(bot.name.value + ":", bot.get_response(r))
         print()
 
 # Run program
