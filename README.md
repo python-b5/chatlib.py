@@ -97,14 +97,14 @@ Already there's an improvement! But what if we want to check for an exact respon
 bot.add_phrase("hello", "(waves at robot)")
 ```
 
-Now we can "wave" at the bot and it will respond accordingly! But when you use the word "waves" out of context, the robot will not say "hi", like would happen in a real conversation. Here's an example:
+Now we can "wave" at the bot and it will respond accordingly! But when you use the word "waves" out of context, the robot will not say "hi", like what would happen in a real conversation. Here's an example:
 
 ```
 User: (waves at robot)
 
 Bob: Hello!
 
-User: I like it when flags wave.
+User: I like it when the flag waves.
 
 Bob: Sorry, I don't understand.
 ```
