@@ -243,7 +243,7 @@ Bot.create_path(name) # create new dialogue option
 
 Bot.add_keyword(path, keyword) # add keyword to path; keyword is checked for anywhere in response
 
-Bot.add_phrase(path, phrase) # add phrase to path; checked if response is phrase
+Bot.add_phrase(path, phrase) # add phrase to path; checked if whole response is exactly phrase
 
 Bot.add_response(path, response) # add response to path; randomly chosen for bot to say
 
