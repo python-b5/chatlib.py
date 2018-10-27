@@ -17,6 +17,7 @@ class Bot:
     def __init__(self, name):
         self.name = name
         self.username = "unnamed"
+        self.punctuation = ['\n', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '`', '-', '=', '[', ']', '\\', ';', "'", ',', '.', '/', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '~', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?']
         self._current_question = None
         self._keywords = defaultdict(list)
         self._responses = defaultdict(list)
@@ -95,21 +96,37 @@ class Bot:
     
     # Add path to question
     def add_question_path(self, path, question, question_path):
-        self._questions[path][question][question_path] = []
-        self._question_keywords[path][question][question_path] = []
-        self._question_phrases[path][question][question_path] = []
+        if path == "":
+            self._path = "_main"
+        else:
+            self._path = path
+        self._questions[self._path][question][question_path] = []
+        self._question_keywords[self._path][question][question_path] = []
+        self._question_phrases[self._path][question][question_path] = []
     
     # Add response to path in question
     def add_question_response(self, path, question, question_path, response):
-        self._questions[path][question][question_path].append(response)
+        if path == "":
+            self._path = "_main"
+        else:
+            self._path = path
+        self._questions[self._path][question][question_path].append(response)
     
     # Add keyword to path in question
     def add_question_keyword(self, path, question, question_path, keyword):
-        self._question_keywords[path][question][question_path].append(keyword)
+        if path == "":
+            self._path = "_main"
+        else:
+            self._path = path
+        self._question_keywords[self._path][question][question_path].append(keyword)
 
     # Add phrase to path in question
     def add_question_phrase(self, path, question, question_path, phrase):
-        self._question_phrases[path][question][question_path].append(phrase)
+        if path == "":
+            self._path = "_main"
+        else:
+            self._path = path
+        self._question_phrases[self._path][question][question_path].append(phrase)
 
     # Get standard response (no question)
     def get_standard_response(self, keywords, phrases, find_response_function):
@@ -119,7 +136,7 @@ class Bot:
             for j in phrases[i]:
                 if self.end:
                     break
-                if j == self._message:
+                if j.lower() == self._message:
                     self._response_type = find_response_function(i)
                     self.end = True
                     break
@@ -131,7 +148,7 @@ class Bot:
                     break
                 bad = False
                 for k in self._message.split():
-                    if j in k and len(k) > len(j):
+                    if j in k and len([x for x in k if x not in self.punctuation]) > len(j):
                         bad = True
                 if bad:
                     continue
@@ -157,7 +174,7 @@ class Bot:
                     for l in phrases[i][j][k]:
                         if self.end:
                             break
-                        if l == self._message:
+                        if l.lower() == self._message:
                             find_response_function(i, j, k)
                             self.end = True
                             break
@@ -175,7 +192,7 @@ class Bot:
                             break
                         bad = False
                         for m in self._message.split():
-                            if l in m and len(l) > len(j):
+                            if l in m and len([x for x in m if x not in self.punctuation]) > len(l):
                                 bad = True
                         if bad:
                             continue
