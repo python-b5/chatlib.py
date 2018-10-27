@@ -134,7 +134,6 @@ Notice that we refer to questions as the question itself. Let's add some keyword
 
 ``` python
 bot.add_question_keyword("howareyou", "I'm good, how about you?", "good", "good")
-bot.add_question_keyword("howareyou", "I'm good, how about you?", "good", "great")
 bot.add_question_phrase("howareyou", "I'm good, how about you?", "good", "I'm doing amazing!")
 bot.add_question_response("howareyou", "I'm good, how about you?", "good", "Good to hear that!")
 bot.add_question_response("howareyou", "I'm good, how about you?", "good", "That's great!")
