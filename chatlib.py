@@ -15,8 +15,8 @@ from collections import defaultdict
 class Bot:
     # Initialize bot
     def __init__(self, name):
-        self.name = name
-        self.username = "unnamed"
+        self.name = Value(name)
+        self.username = Value("unnamed")
         self.punctuation = ['\n', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '`', '-', '=', '[', ']', '\\', ';', "'", ',', '.', '/', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '~', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?']
         self._current_question = None
         self._keywords = defaultdict(list)
@@ -41,18 +41,38 @@ class Bot:
             if len(i) < 1:
                 self._choices.remove(i)
         self._selected_rp = random.choice(self._choices)
-        self._response = random.choice(self._selected_rp) if self._selected_rp == self._responses[self._current_path] else random.choice(list(self._questions[self._current_path]))
+        self._response = []
+        response = random.choice(self._selected_rp) if self._selected_rp == self._responses[self._current_path] else random.choice(list(self._questions[self._current_path]))
+        if isinstance(response, tuple):
+            for i in response:
+                if isinstance(i, Value):
+                    self._response.append(str(i.value))
+                else:
+                    self._response.append(str(i))
+        else:
+            self._response.append(str(response))
+        self._response = "".join(self._response)
         return "r" if self._selected_rp == self._responses[self._current_path] else (self._current_path, self._response)
     
     # Find response (question)
     def find_question_response(self, path, question, question_path):
         self._current_path = path
         self._selected_rp = self._questions[self._current_path][question][question_path]
-        self._response = random.choice(self._selected_rp)
+        self._response = []
+        response = random.choice(self._selected_rp)
+        if isinstance(response, tuple):
+            for i in response:
+                if isinstance(i, Value):
+                    self._response.append(str(i.value))
+                else:
+                    self._response.append(str(i))
+        else:
+            self._response.append(str(response))
+        self._response = "".join(self._response)
 
     # Set bot username
     def set_username(self, name):
-        self.username = name
+        self.username.value = name
 
     # Create new path
     def create_path(self, name):
@@ -136,7 +156,17 @@ class Bot:
             for j in phrases[i]:
                 if self.end:
                     break
-                if j.lower() == self._message:
+                phrase = []
+                if isinstance(j, tuple):
+                    for k in j:
+                        if isinstance(k, Value):
+                            phrase.append(str(k.value))
+                        else:
+                            phrase.append(str(k))
+                else:
+                    phrase.append(str(j))
+                phrase = "".join(phrase)
+                if phrase.lower() == self._message:
                     self._response_type = find_response_function(i)
                     self.end = True
                     break
@@ -146,13 +176,23 @@ class Bot:
             for j in keywords[i]:
                 if self.end:
                     break
+                keyword = []
+                if isinstance(j, tuple):
+                    for k in j:
+                        if isinstance(k, Value):
+                            keyword.append(str(k.value))
+                        else:
+                            keyword.append(str(k))
+                else:
+                    keyword.append(str(j))
+                keyword = "".join(keyword)
                 bad = False
                 for k in self._message.split():
-                    if j in k and len([x for x in k if x not in self.punctuation]) > len(j):
+                    if keyword in k and len([x for x in k if x not in self.punctuation]) > len(keyword):
                         bad = True
                 if bad:
                     continue
-                if j in self._message:
+                if keyword in self._message:
                     self._response_type = find_response_function(i)
                     self.end = True
                     break
@@ -174,7 +214,17 @@ class Bot:
                     for l in phrases[i][j][k]:
                         if self.end:
                             break
-                        if l.lower() == self._message:
+                        phrase = []
+                        if isinstance(l, tuple):
+                            for m in l:
+                                if isinstance(m, Value):
+                                    phrase.append(str(m.value))
+                                else:
+                                    phrase.append(str(m))
+                        else:
+                            phrase.append(str(l))
+                        phrase = "".join(phrase)
+                        if phrase.lower() == self._message:
                             find_response_function(i, j, k)
                             self.end = True
                             break
@@ -190,13 +240,23 @@ class Bot:
                     for l in keywords[i][j][k]:
                         if self.end:
                             break
+                        keyword = []
+                        if isinstance(l, tuple):
+                            for m in l:
+                                if isinstance(m, Value):
+                                    keyword.append(str(m.value))
+                                else:
+                                   keyword.append(str(m))
+                        else:
+                            keyword.append(str(l))
+                        keyword = "".join(keyword)
                         bad = False
                         for m in self._message.split():
-                            if l in m and len([x for x in m if x not in self.punctuation]) > len(l):
+                            if keyword in m and len([x for x in m if x not in self.punctuation]) > len(keyword):
                                 bad = True
                         if bad:
                             continue
-                        if l in self._message:
+                        if keyword in self._message:
                             find_response_function(i, j, k)
                             self.end = True
                             break
@@ -217,3 +277,8 @@ class Bot:
             self.get_question_response(self._question_keywords, self._question_phrases, self.find_question_response)
             self._do_question = False
         return self._response
+
+# Alterable value class
+class Value:
+    def __init__(self, initial_value):
+        self.value = initial_value
