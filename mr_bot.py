@@ -3,6 +3,7 @@
 #
 # An example chatbot, made with chatlib.py.
 
+# Imports
 import chatlib
 from datetime import datetime
 
@@ -85,6 +86,7 @@ def main():
     bot.add_question_response("howareyou", "Good, what about you?", "bad", "Hope you feel better soon!")
     bot.add_question_path("howareyou", "Good, what about you?", "good")
     bot.add_question_keyword("howareyou", "Good, what about you?", "good", "good")
+    bot.add_question_keyword("howareyou", "Good, what about you?", "good", "gud")
     bot.add_question_keyword("howareyou", "Good, what about you?", "good", "fine")
     bot.add_question_keyword("howareyou", "Good, what about you?", "good", "great")
     bot.add_question_keyword("howareyou", "Good, what about you?", "good", "okay")
@@ -430,7 +432,7 @@ def main():
     bot.set_username(input("Username? "))
 
     # Print greeting
-    print("\n" + bot.name.value + ":", "Hi, I'm", bot.name.value + "!\n")
+    print("\n" + bot.name.value + ":", "Hi, I'm " + bot.name.value + "!\n")
 
     # Simple mainloop
     while True:
