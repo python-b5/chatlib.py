@@ -9,6 +9,8 @@
 
 # Imports
 import random
+import string
+import re
 from collections import defaultdict
 
 # Bot class
@@ -32,6 +34,9 @@ class Bot:
         self._question_phrases["_main"] = defaultdict(dict)
         self._phrases["_main"] = []
         self._do_question = False
+
+    def find_word(self, w, s):
+        return (' ' + w + ' ') in (' ' + s + ' ')
 
     # Find response (no question)
     def find_response(self, path):
@@ -149,7 +154,7 @@ class Bot:
         self._question_phrases[self._path][question][question_path].append(phrase)
 
     # Get standard response (no question)
-    def get_standard_response(self, keywords, phrases, find_response_function):
+    def get_standard_response(self, message, keywords, phrases, find_response_function):
         for i in phrases:
             if self.end:
                 break
@@ -166,7 +171,7 @@ class Bot:
                 else:
                     phrase.append(str(j))
                 phrase = "".join(phrase)
-                if phrase.lower() == self._message:
+                if phrase.lower() == message:
                     self._response_type = find_response_function(i)
                     self.end = True
                     break
@@ -186,26 +191,7 @@ class Bot:
                 else:
                     keyword.append(str(j))
                 keyword = "".join(keyword)
-                bad = False
-                index = 0
-                count = 0
-                while count < len(keyword):
-                    try:
-                        if keyword[index] == keyword[count]:
-                            count += 1
-                        else:
-                            count = 0
-                    except IndexError:
-                        pass
-                    index += 1
-                try:
-                    if self._message[index] not in self.punctuation:
-                        bad = True
-                except IndexError:
-                    pass
-                if bad:
-                    continue
-                if keyword in self._message:
+                if self.find_word(keyword, re.sub("[" + string.punctuation + "]", "", message)):
                     self._response_type = find_response_function(i)
                     self.end = True
                     break
@@ -214,7 +200,7 @@ class Bot:
             self._response = random.choice(self._responses["_main"])
     
     # Get question response
-    def get_question_response(self, keywords, phrases, find_response_function):
+    def get_question_response(self, message, keywords, phrases, find_response_function):
         for i in phrases:
             if self.end:
                 break
@@ -237,7 +223,7 @@ class Bot:
                         else:
                             phrase.append(str(l))
                         phrase = "".join(phrase)
-                        if phrase.lower() == self._message:
+                        if phrase.lower() == message:
                             find_response_function(i, j, k)
                             self.end = True
                             break
@@ -263,26 +249,7 @@ class Bot:
                         else:
                             keyword.append(str(l))
                         keyword = "".join(keyword)
-                        bad = False
-                        index = 0
-                        count = 0
-                        while count < len(keyword):
-                            try:
-                                if keyword[index] == keyword[count]:
-                                    count += 1
-                                else:
-                                    count = 0
-                            except IndexError:
-                                pass
-                            index += 1
-                        try:
-                            if self._message[index] not in self.punctuation:
-                                bad = True
-                        except IndexError:
-                            pass
-                        if bad:
-                            continue
-                        if keyword in self._message:
+                        if self.find_word(keyword, re.sub("[" + string.punctuation + "]", "", message)):
                             find_response_function(i, j, k)
                             self.end = True
                             break
@@ -295,12 +262,12 @@ class Bot:
         self.end = False
         self._message = message.lower()
         if not self._do_question:
-            self.get_standard_response(self._keywords, self._phrases, self.find_response)
+            self.get_standard_response(self._message, self._keywords, self._phrases, self.find_response)
             if isinstance(self._response_type, tuple):
                 self._current_question == self._response_type
                 self._do_question = True
         else:
-            self.get_question_response(self._question_keywords, self._question_phrases, self.find_question_response)
+            self.get_question_response(self._message, self._question_keywords, self._question_phrases, self.find_question_response)
             self._do_question = False
         return self._response
 
